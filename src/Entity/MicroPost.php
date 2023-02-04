@@ -39,6 +39,9 @@ class MicroPost
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    public const EDIT = 'POST_EDIT';
+    public const VIEW = 'POST_VIEW';
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
