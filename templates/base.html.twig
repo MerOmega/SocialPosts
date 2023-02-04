@@ -1,0 +1,50 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body class="dark:bg-gray-800 dark:text-white">
+    <header class="flex bg-sky-600/50 py-2 items-center mb-12">
+            <div class="w-full md:w-2/3 mx-auto mb-4 flex justify-between items-center">
+                <div class="text-4xl ">
+                    <a href="{{ path('app_micro_post') }}">Home</a>
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-400 text-xl flex flex-col">
+                    {% if app.user %}
+                        <a class="hover:text-white" href="{{ path('app_logout') }}">Logout</a>
+                        <a class="hover:text-white" href="{{ path('app_micro_post_add') }}"> Add new Post</a>
+                    {% else %}
+                        <a class="hover:text-white" href="{{ path('app_login') }}">Login</a>
+
+                    {% endif %}
+
+                </div>
+            </div>
+
+        {% block bread %}
+
+        {% endblock %}
+    </header>
+
+    <div class="w-full md-w-2/3 mx-auto">
+        {% for message in app.flashes("success") %}
+            <div class="rounded-md p-2 border-green-300 bg-green-50 border dark:border-green-600 dark:bg-green-700 dark:text-white mb-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% block body %}
+
+        {% endblock %}
+    </div>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <form class="mt-40 flex flex-col items-center" action="{{ path('app_login') }}" method="POST">
+        <div  class="flex flex-col">
+            <label
+                    class="block text-sm text-gray-700 dark:text-gray-300 font-medium">Email</label>
+            <input
+                    type="text"
+                    name="_username"
+                    value="{{ lastUsername }}"
+                    class="block w-full shadow-sm
+                       border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md
+                       border p-2 mt-1 mb-2 font-bold" />
+        </div>
+
+        <div>
+            <label
+                    class="flex flex-col">Password</label>
+            <input type="password"
+                   name="_password"
+                   class="block w-full shadow-sm
+                       border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md
+                       border p-2 mt-1 mb-2 font-bold"
+            />
+        </div>
+
+        <input type="hidden" name="_target_path"
+               value="{{ path('app_micro_post') }}" />
+
+        <div>
+            <button type="submit"
+                    class="mt-4 dark:bg-indigo-600 px-12 py-2 rounded-md hover:dark:bg-indigo-400">Login</button>
+        </div>
+    </form>
+{% endblock %}

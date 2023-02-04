@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+
+
+
+
+    {% block body %}
+        <div>
+
+            <b>
+                {{ message.message }}
+            </b>
+            {{ include('hello/_message.html.twig') }}
+        </div>
+    {% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+    <div class="mx-5">
+        <div>
+            <h1>{{ post.title }}</h1>
+            {{ include('micro_post/_post.html.twig',{post:post}) }}
+        </div>
+        <div class="mt-4">
+            {% for comment in post.comments %}
+                <div>
+                    <div class="flex items-center">
+                        <div class="
+                        inline-block dark:bg-gray-700 rounded-full text-3xl w-8 h-8
+                        ring-white dark:ring-gray-600 mr-2">
+
+                        </div>
+                        <div>
+                            <div class="font-medium dark:text-gray-300">
+                                <p>{{ comment.author.email }}</p>
+                            </div>
+                            <div class="font-light dark:text-gray-300">
+                                <p>{{ comment.created | date("M j, Y")  }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="border dark:border-gray-600 ml-4 mr-4 pb-12"></div>
+                        <div>{{ comment.text }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
