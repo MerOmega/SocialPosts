@@ -3,12 +3,6 @@
 {% block title %}All Posts{% endblock %}
 
 {% block body %}
-    <div class="pt-30 px-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        {% if posts | length > 0 %}
-                {% for post in posts %}
-                    {{ include('micro_post/_post.html.twig',{post:post}) }}
-                {% endfor %}
-        {% endif %}
-    </div>
+    {{ include('micro_post/_post.list.html.twig') }}
 {% endblock %}
 

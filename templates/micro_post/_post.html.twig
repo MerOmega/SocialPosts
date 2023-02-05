@@ -4,7 +4,7 @@
     </div>
     <div class="flex items-center">
         <div class="text-sm dark:text-white pr-5">
-            <a href="">{{ post.author.email }}</a>
+            <a href="{{ path('app_profile',{id:post.author.id}) }}">{{ post.author.email }}</a>
         </div>
         <div class="dark:text-gray-400">
             {{ post.date | date("M j, Y") }}
@@ -14,9 +14,15 @@
         {{ post.text }}
     </div>
     <div class="mt-1 flex">
-        <a href="" class="mr-2">
-            Likes <span class="px-2 py-0.5 rounded-md dark:bg-gray-700">0</span>
-        </a>
+        {% if post.likedBy.contains(app.user) %}
+            <a href="{{ path('app_dislike', { id: post.id }) }}">
+                Unlike <span class="px-2 rounded-md bg-gray-200 dark:bg-gray-700">{{ post.likedBy.count }}</span>
+            </a>
+        {% else %}
+            <a href="{{ path('app_like',{id:post.id}) }}" class="mr-2">
+                Likes <span class="px-2 py-0.5 rounded-md dark:bg-gray-700">{{ post.likedBy.count }}</span>
+            </a>
+        {% endif %}
         <p href="">
             Comments <span class="px-2 py-0.5 rounded-md dark:bg-gray-700">{{ post.comments.count }}</span>
         </p>

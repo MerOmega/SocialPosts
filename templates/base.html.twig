@@ -19,12 +19,13 @@
                 <div class="text-4xl ">
                     <a href="{{ path('app_micro_post') }}">Home</a>
                 </div>
-                <div class="text-sm text-gray-500 dark:text-gray-400 text-xl flex flex-col">
+                <div class="text-sm text-gray-500 dark:text-gray-400 text-xl flex">
                     {% if app.user %}
-                        <a class="hover:text-white" href="{{ path('app_logout') }}">Logout</a>
+                        <a class="hover:text-white pr-2" href="{{ path('app_settings_profile') }}">Profile</a>
+                        <a class="hover:text-white pr-2" href="{{ path('app_logout') }}">Logout</a>
                         <a class="hover:text-white" href="{{ path('app_micro_post_add') }}"> Add new Post</a>
                     {% else %}
-                        <a class="hover:text-white" href="{{ path('app_login') }}">Login</a>
+                        <a class="hover:text-white pr-2" href="{{ path('app_login') }}">Login</a>
                         <a class="hover:text-white" href="{{ path('app_register') }}">Register</a>
                     {% endif %}
 
