@@ -3,7 +3,13 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-    <form class="mt-40 flex flex-col items-center" action="{{ path('app_login') }}" method="POST">
+
+    <h1 class="text-3xl flex justify-center pb-8">Login</h1>
+
+    <h2 class="text-xl dark:text-gray-400 flex justify-center pb-8"> <a href="{{ path('app_register') }}">Not registered user? Do it here!</a> </h2>
+
+
+    <form class="mt-3 flex flex-col items-center" action="{{ path('app_login') }}" method="POST">
         <div  class="flex flex-col">
             <label
                     class="block text-sm text-gray-700 dark:text-gray-300 font-medium">Email</label>
