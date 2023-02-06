@@ -42,7 +42,7 @@ class MicroPostController extends AbstractController
 
 
     #[Route("/micro/{post}",name: "app_micro_post_show")]
-    #[IsGranted(MicroPost::VIEW,"post")]
+    #[IsGranted("IS_AUTHENTICATED_FULLY")]
     public function showOne(MicroPost $post):Response
     {
         return $this->render('micro_post/show.html.twig', [
