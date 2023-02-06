@@ -41,12 +41,23 @@ class MicroPostVoter extends Voter
         }
 
         // ... (check conditions and return true to grant permission) ...
-        return match ($attribute) {
-            MicroPost::EDIT => $isAuth && ($subject->getAuthor()->getId() === $user->getId())
-                || $this->security->isGranted("ROLE_EDITOR"),
-            MicroPost::VIEW => false,
-            default => false,
-        };
+        switch ($attribute) {
+            case MicroPost::EDIT:
+                return $isAuth
+                    && (
+                        ($subject->getAuthor()->getId() === $user->getId()) ||
+                        $this->security->isGranted('ROLE_EDITOR')
+                    );
+            case MicroPost::VIEW:
+                if (!$subject->isExtraPrivacy()) {
+                    return true;
+                }
 
+                return $isAuth &&
+                    ($subject->getAuthor()->getId() === $user->getId()
+                        || $subject->getAuthor()->getFollows()->contains($user)
+                    );
+        }
+        return false;
     }
 }

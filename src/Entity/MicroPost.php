@@ -39,6 +39,9 @@ class MicroPost
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    #[ORM\Column]
+    private ?bool $extraPrivacy = null;
+
     public const EDIT = 'POST_EDIT';
     public const VIEW = 'POST_VIEW';
 
@@ -47,6 +50,7 @@ class MicroPost
         $this->comments = new ArrayCollection();
         $this->likedBy = new ArrayCollection();
         $this->date= new DateTime();
+        $this->extraPrivacy = false;
     }
 
     public function getId(): ?int
@@ -152,6 +156,18 @@ class MicroPost
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function isExtraPrivacy(): ?bool
+    {
+        return $this->extraPrivacy;
+    }
+
+    public function setExtraPrivacy(bool $extraPrivacy): self
+    {
+        $this->extraPrivacy = $extraPrivacy;
 
         return $this;
     }
