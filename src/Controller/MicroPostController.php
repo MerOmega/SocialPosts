@@ -41,6 +41,7 @@ class MicroPostController extends AbstractController
     }
 
 
+
     #[Route("/micro/{post}",name: "app_micro_post_show")]
     #[IsGranted("IS_AUTHENTICATED_FULLY")]
     public function showOne(MicroPost $post):Response
@@ -50,7 +51,24 @@ class MicroPostController extends AbstractController
         ]);
     }
 
-    #[Route("/micro/add",name:"app_micro_post_add",priority: 2)]
+    #[Route('/micro/topLiked', name: 'app_micropost_topliked',priority: 2)]
+    public function topLiked(MicroPostRepository $post): Response
+    {
+
+        return $this->render('micro_post/top_liked.html.twig', [
+            'posts' => $post->findAllWithMinLikes(2),
+        ]);
+    }
+
+    #[Route('/micro/fromfollower', name: 'app_micropost_postsfromfollower',priority: 2)]
+    public function postsFromFollower(MicroPostRepository $posts): Response
+    {
+        $currentUser = $this->getUser();
+        return $this->render('micro_post/from_follows.html.twig', [
+            'posts' => $posts->findAllByAuthors( $currentUser->getFollows()),
+        ]);
+    }
+    #[Route("/micro/add",name:"app_micro_post_add",priority: 3)]
     #[IsGranted("ROLE_WRITER")]
     public function add(Request $request,MicroPostRepository $repository):Response
     {
@@ -75,7 +93,7 @@ class MicroPostController extends AbstractController
         );
     }
 
-    #[Route("/micro/{post}/edit",name:"app_micro_post_edit",priority: 2)]
+    #[Route("/micro/{post}/edit",name:"app_micro_post_edit",priority: 3)]
     #[IsGranted(MicroPost::EDIT,"post")]
     public function edit( MicroPost $post, Request $request,MicroPostRepository $repository):Response
     {
@@ -98,7 +116,7 @@ class MicroPostController extends AbstractController
         );
     }
 
-    #[Route("/micro/{post}/comment",name:"app_micro_post_comment",priority: 2)]
+    #[Route("/micro/{post}/comment",name:"app_micro_post_comment",priority: 3)]
     #[IsGranted("IS_AUTHENTICATED_FULLY")]
     public function addComment( MicroPost $post, Request $request,CommentRepository $repository):Response
     {

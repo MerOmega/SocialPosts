@@ -2,7 +2,10 @@
 
 {% block title %}Profile Settings{% endblock %}
 
+
+
 {% block body %}
+    {{ include('settings_profile/_tabs.html.twig') }}
     <div class="px-20">
         {{ form_start(form) }}
             {{ include('settings_profile/_form.html.twig') }}

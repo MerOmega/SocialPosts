@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avatar Settings{% endblock %}
+
+
+
+{% block body %}
+    {{ include('settings_profile/_tabs.html.twig') }}
+    <div class="px-20">
+        {{ form_start(form) }}
+            {{ form_label(form.profileImage, 'Change', {'label_attr': {'class': 'shadow-sm border-transparent bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-900 cursor-pointer rounded-md border p-2'}}) }}
+            {{ form_widget(form.profileImage) }}
+            {{ form_errors(form.profileImage) }}
+            <div class="mt-4 flex justify-center">
+                <button type="submit"
+                        class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4
+                    hover:bg-indigo-400
+                    rounded w-full">Save it</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
