@@ -5,5 +5,5 @@
 {% block body %}
     {{ include('profile/_profile_header.html.twig',{user:user}) }}
     {{ include('profile/_profile_tabs.html.twig',{user:user}) }}
-    {{ include ('micro_post/_post.list.html.twig', { posts: user.posts }) }}
+    {{ include ('micro_post/_post.list.html.twig', { posts: posts }) }}
 {% endblock %}
